@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from './translation.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-angular-project';
+  title = 'АТУ электронды жатақханасы';
+  constructor(private translationService: TranslationService) {
+    this.translationService.init();
+  }
 }

@@ -13,10 +13,23 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf"
+          },
+          "kz": {
+            "translation": "src/locale/messages.kz.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "outputPath": "dist/my-angular-project",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,6 +48,15 @@
             "scripts": []
           },
           "configurations": {
+            "ru": {
+              "localize": ["ru"]
+            },
+            "kz": {
+              "localize": ["kz"]
+            },
+            "en": {
+              "localize": ["en"]
+            },
             "production": {
               "budgets": [
                 {
@@ -64,6 +86,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "kz": {
+              "browserTarget": "my-angular-project:build:development,kz"
+            },
+            "ru": {
+              "browserTarget": "my-angular-project:build:development,ru"
+            },
+            "en": {
+              "browserTarget": "my-angular-project:build:development,en"
+            },
             "production": {
               "browserTarget": "my-angular-project:build:production"
             },
@@ -76,7 +107,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-angular-project:build"
+            "browserTarget": "my-angular-project:build",
+            "format": "xlf",
+            "outputPath": "src/locale"
           }
         },
         "test": {
